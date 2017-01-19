@@ -12,9 +12,14 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitignore
-# Description: Ignore rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain repository.
+# File: CMakeLists.txt
+# Description: Core CMake rules for the Parallax P8X32A Propeller microcontroller CMake
+#       toolchain example programs.
 
-# ignore the build directory
-build/
+cmake_minimum_required( VERSION 3.0.2 )
+project( toolchain-parallax_p8x32a C CXX )
+
+# version
+set( TOOLCHAIN_PARALLAX_P8X32A 0 )
+set( TOOLCHAIN_PARALLAX_P8X32A 0 )
+set( TOOLCHAIN_PARALLAX_P8X32A 0 )
