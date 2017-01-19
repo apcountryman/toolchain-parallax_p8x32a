@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# toolchain-parallax_p8x32a
+#
+# Copyright 2017 Andrew Countryman <apcountryman@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+# file except in compliance with the License. You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under
+# the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+
+# File: pre-commit
+# Description: Pre-commit git hook script for the Parallax P8X32A Propeller
+#       microcontroller CMake toolchain repository.
+
+# determine the commit ID to work against
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+    against=HEAD
+
+else
+    against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+
+fi
+
+# verify file names are portable
+echo -n "pre-commit: checking for non-portable file names ... "
+
+if test $( git diff --cached --name-only --diff-filter=A -z $against |
+           LC_ALL=C tr -d '[ -~]\0' | wc -c ) != 0; then
+
+    echo "error(s) found"
+    ( >&2 echo "pre-commit: aborting commit due to non-portable file name(s)" )
+    exit 1
+
+fi
+
+echo "none"
+
+# verify there are no whitespace errors
+echo -n "pre-commit: checking for whitespace errors ......... "
+
+git diff-index --check --cached $against -- >/dev/null 2>&1
+if [[ $? != 0 ]]; then
+    echo "error(s) found"
+    git diff-index --check --cached $against --
+    ( >&2 echo "pre-commit: aborting commit due to whitespace error(s)" )
+    exit 1
+
+fi
+
+echo "none"
+
+exit 0
