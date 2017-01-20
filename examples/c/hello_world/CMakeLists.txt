@@ -13,26 +13,11 @@
 # permissions and limitations under the License.
 
 # File: CMakeLists.txt
-# Description: Core CMake rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain example programs.
+# Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
+#       toolchain hello world C example program.
 
-cmake_minimum_required( VERSION 3.0.2 )
-project( toolchain-parallax_p8x32a C CXX )
-
-# version
-set( TOOLCHAIN_PARALLAX_P8X32A_MAJOR 0 )
-set( TOOLCHAIN_PARALLAX_P8X32A_MINOR 0 )
-set( TOOLCHAIN_PARALLAX_P8X32A_PATCH 0 )
-
-# configure compilation and linking
-set(
-    CMAKE_C_FLAGS
-    "${CMAKE_C_FLAGS} \
-    -m${PARALLAX_P8X32A_MEMORY_MODEL} \
-    --std=c99 \
-    -Werror -Wall -Wpointer-arith -Wstrict-prototypes \
-    "
+# build the hello world program
+add_executable(
+    example-c-hello_world
+    main.c
 )
-
-# build the examples
-add_subdirectory( examples )

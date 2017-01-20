@@ -100,6 +100,14 @@ if [[ $? != 0 ]]; then
 
 fi
 
+make -j --quiet >/dev/null 2>&1
+if [[ $? != 0 ]]; then
+    echo "error(s) found"
+    ( >&2 echo "pre-commit: aborting commit due to Parallax P8X32A build make error(s)" )
+    exit 1
+
+fi
+
 echo "none"
 
 exit 0
