@@ -24,6 +24,14 @@ set( TOOLCHAIN_PARALLAX_P8X32A_MAJOR 0 )
 set( TOOLCHAIN_PARALLAX_P8X32A_MINOR 0 )
 set( TOOLCHAIN_PARALLAX_P8X32A_PATCH 0 )
 
+# add a blink pin option for the blink example programs
+set( BLINK_PIN 0 CACHE STRING "Blink example program blink pin" )
+if( NOT BLINK_PIN MATCHES "^([0-9]|1[0-9]|2[0-7])$" )
+    message( FATAL_ERROR "BLINK_PIN must be a number between 0 and 27 inclusive" )
+
+endif( NOT BLINK_PIN MATCHES "^([0-9]|1[0-9]|2[0-7])$" )
+
+
 # configure compilation and linking
 set(
     CMAKE_C_FLAGS
@@ -31,6 +39,14 @@ set(
     -m${PARALLAX_P8X32A_MEMORY_MODEL} \
     --std=c99 \
     -Werror -Wall -Wpointer-arith -Wstrict-prototypes \
+    "
+)
+set(
+    CMAKE_CXX_FLAGS
+    "${CMAKE_CXX_FLAGS} \
+    -m${PARALLAX_P8X32A_MEMORY_MODEL} \
+    -std=c++03 \
+    -Werror -Wall -Wpointer-arith \
     "
 )
 

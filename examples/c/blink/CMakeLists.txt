@@ -16,14 +16,7 @@
 # Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
 #       toolchain blink C example program.
 
-# add a blink pin CMake option
-set( BLINK_PIN 0 CACHE STRING "Blink example program blink pin" )
-if( NOT BLINK_PIN MATCHES "^([0-9]|1[0-9]|2[0-7])$" )
-    message( FATAL_ERROR "BLINK_PIN must be a number between 0 and 27 inclusive" )
-
-endif( NOT BLINK_PIN MATCHES "^([0-9]|1[0-9]|2[0-7])$" )
-
-# build the hello world program
+# build the blink program
 add_executable(
     example-c-blink
     main.c
