@@ -14,10 +14,7 @@
 
 # File: CMakeLists.txt
 # Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain example programs.
+#       toolchain C++ example programs.
 
-# build the C examples
-add_subdirectory( c )
-
-# build the C++ examples
-add_subdirectory( c++ )
+# build the hello world program
+add_subdirectory( hello_world )
