@@ -21,3 +21,8 @@ add_executable(
     example-c-hello_world
     main.c
 )
+parallax_p8x32a_add_load_target(
+    example-c-hello_world
+    ${WRITE_EEPROM} RUN TERMINAL
+    BOARD ${BOARD}
+)

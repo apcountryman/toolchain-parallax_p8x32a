@@ -55,8 +55,79 @@ set(
 list( SORT PARALLAX_P8X32A_MEMORY_MODELS )
 set( PARALLAX_P8X32A_MEMORY_MODEL "lmm" CACHE STRING "Parallax P8X32A memory model" )
 
-list( FIND PARALLAX_P8X32A_MEMORY_MODELS ${PARALLAX_P8X32A_MEMORY_MODEL} VALID_MEMORY_MODEL )
+list(
+    FIND PARALLAX_P8X32A_MEMORY_MODELS
+    ${PARALLAX_P8X32A_MEMORY_MODEL}
+    VALID_MEMORY_MODEL
+)
 if ( ${VALID_MEMORY_MODEL} LESS 0 )
-    message( SEND_ERROR "${PARALLAX_P8X32A_MEMORY_MODEL} is not a valid memory model" )
+    message( FATAL_ERROR "${PARALLAX_P8X32A_MEMORY_MODEL} is not a valid memory model" )
 
 endif ( ${VALID_MEMORY_MODEL} LESS 0 )
+
+# Add a basic load target for an executable.
+#
+# SYNOPSIS:
+#       parallax_p8x32a_add_load_target( <executable>
+#                                        [EEPROM] [RUN] [TERMINAL]
+#                                        [BOARD <board>] )
+#
+# OPTIONS:
+#       BOARD <board>
+#           Adds propeller-load's "-b <type>" option where "<type>" is <board>.
+#       EEPROM
+#           Adds propeller-load's "-e" option.
+#       <executable>
+#           The name of the executable to make the load target for.
+#       RUN
+#           Adds propeller-load's "-r" option.
+#       TERMINAL
+#           Adds propeller-load's "-t" option.
+# EXAMPLES:
+#       parallax_p8x32a_add_load_target( foo RUN )
+#       parallax_p8x32a_add_load_target( foo RUN BOARD eeprom )
+#       parallax_p8x32a_add_load_target( foo RUN TERMINAL BOARD eeprom )
+#       parallax_p8x32a_add_load_target( foo EEPROM RUN BOARD eeprom )
+function( parallax_p8x32a_add_load_target EXECUTABLE )
+    set( options EEPROM RUN TERMINAL )
+    set( one_value_args BOARD )
+    set( multi_value_args )
+    include( CMakeParseArguments )
+    cmake_parse_arguments(
+        parallax_p8x32a_add_load_target
+        "${options}"
+        "${one_value_args}"
+        "${multi_value_args}"
+        ${ARGN}
+    )
+
+    # configure loader arguments
+    set( loader_args "" )
+
+    if( parallax_p8x32a_add_load_target_EEPROM )
+        set( loader_args ${loader_args} "-e" )
+
+    endif( parallax_p8x32a_add_load_target_EEPROM )
+
+    if( parallax_p8x32a_add_load_target_RUN )
+        set( loader_args ${loader_args} "-r" )
+
+    endif( parallax_p8x32a_add_load_target_RUN )
+
+    if( parallax_p8x32a_add_load_target_TERMINAL )
+        set( loader_args ${loader_args} "-t" )
+
+    endif( parallax_p8x32a_add_load_target_TERMINAL )
+
+    if( NOT "${parallax_p8x32a_add_load_target_BOARD}" STREQUAL "" )
+        set( loader_args ${loader_args} "-b" ${parallax_p8x32a_add_load_target_BOARD} )
+
+    endif( NOT "${parallax_p8x32a_add_load_target_BOARD}" STREQUAL "" )
+
+    # add the load target
+    add_custom_target(
+        ${EXECUTABLE}-load
+        COMMAND ${PARALLAX_P8X32A_LOADER} ${loader_args} ${EXECUTABLE}
+        DEPENDS ${EXECUTABLE}
+    )
+endfunction( parallax_p8x32a_add_load_target )

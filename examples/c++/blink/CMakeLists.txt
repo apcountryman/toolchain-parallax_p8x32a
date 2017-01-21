@@ -25,3 +25,8 @@ target_compile_definitions(
     example-c++-blink
     PRIVATE BLINK_PIN=${BLINK_PIN}
 )
+parallax_p8x32a_add_load_target(
+    example-c++-blink
+    ${WRITE_EEPROM} RUN
+    BOARD ${BOARD}
+)
