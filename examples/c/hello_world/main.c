@@ -1,4 +1,4 @@
-/*
+/**
  * toolchain-parallax_p8x32a
  *
  * Copyright 2017 Andrew Countryman <apcountryman@gmail.com>
@@ -14,17 +14,24 @@
  * governing permissions and limitations under the License.
  */
 
-/*
- * File: main.c
- * Description: Hello world C example program.
+/**
+ * \file main.c
+ * \brief Hello world C example program.
  */
 
 #include <stdio.h>
 
+/**
+ * \brief Main loop.
+ *
+ * \return N/A, enters an infinite loop once message printing is complete
+ */
 int main( void )
 {
+    // print the message
     printf( "Hello, world!\n" );
 
+    // infinite loop
     for ( ;; ) {}
 
     return 0;
