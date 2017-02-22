@@ -108,7 +108,7 @@ LED::~LED()
 
 void LED::toggle( void )
 {
-    // toggle the state of the LED pin
+    // toggle the state of the LED
     OUTA ^= mask_;
 
     return;
@@ -121,7 +121,7 @@ void LED::toggle( void )
  *
  * \return The number of clock ticks in period.
  */
-uint32_t ms_to_ticks( unsigned int ms )
+static uint32_t ms_to_ticks( unsigned int ms )
 {
     return ( CLKFREQ / 1000U ) * ms;
 }
@@ -130,9 +130,8 @@ uint32_t ms_to_ticks( unsigned int ms )
  * \brief Blink a LED.
  *
  * \param[in] led The LED to blink.
- * \param[in] n The number of times to blink the LED. If n is zero, the LED will be
- *            blinked infinitely. If n is greater than UINT_MAX / 2, no LED will be
- *            blinked.
+ * \param[in] n The number of times to blink the LED. If n is 0, the LED will be blinked
+ *            infinitely. If n is greater than UINT_MAX / 2, no LED will be blinked.
  * \param[in] period The blinking period in milliseconds. If period is less than 2, no LED
  *            will be blinked.
  */
@@ -146,8 +145,8 @@ static void blink( LED & led, unsigned int n, unsigned int period )
     if ( error ) { return; }
 
     // initialize the timing parameters
-    uint32_t half_period_ticks = ms_to_ticks( period / 2 );
-    uint32_t next_cnt          = half_period_ticks + CNT;
+    uint32_t const half_period_ticks = ms_to_ticks( period / 2 );
+    uint32_t next_cnt                = half_period_ticks + CNT;
 
     // blink the LED
     for ( unsigned int i = 0; n == 0 || i < 2 * n; ++i ) {
