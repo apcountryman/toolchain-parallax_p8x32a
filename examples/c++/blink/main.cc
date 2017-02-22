@@ -1,4 +1,4 @@
-/*
+/**
  * toolchain-parallax_p8x32a
  *
  * Copyright 2017 Andrew Countryman <apcountryman@gmail.com>
@@ -14,42 +14,172 @@
  * governing permissions and limitations under the License.
  */
 
-/*
- * File: main.c
- * Description: Blink C++ example program.
+/**
+ * \file main.c
+ * \brief Blink C++ example program.
  */
 
 #include <propeller.h>
+#include <stdint.h>
+#include <limits.h>
 
-// ensure the blink pin has been defined
-#ifndef BLINK_PIN
-    #error "Blink pin not defined"
+/**
+ * \brief A LED.
+ */
+class LED {
+    public:
+        /**
+         * \brief Acquire the pin resources associated with the LED, record their initial
+         *        state, and drive the LED low.
+         *
+         * \param[in] pin The pin the LED is connected to. If pin is greater than 31, the
+         *            LED will be non-responsive. Ideally this would result in an
+         *            exception being thrown but that would result in the example being
+         *            too large for the smaller memory models.
+         */
+        LED( unsigned int const pin );
 
-#endif
+        /**
+         * \brief Release the pin resources associated with the LED, restoring them to
+         *        their prior state.
+         */
+        ~LED();
 
-// ensure the blink pin is a valid pin and is not a pin used for special purposes
-#if BLINK_PIN > 27
-    #error "Excessive blink pin"
+        /**
+         * \brief Toggle the state of the LED.
+         */
+        void toggle( void );
 
-#endif
+    private:
+        /**
+         * \brief Default construction prohibited.
+         */
+        LED();
 
-int main( void )
+        /**
+         * \brief Copy construction prohibited.
+         */
+        LED( LED const & led );
+
+        /**
+         * \brief Copy assignment prohibited.
+         */
+        LED & operator=( LED const & led );
+
+        /**
+         * \brief Bit mask for interacting with the I/O registers.
+         */
+        uint32_t const mask_;
+
+        /**
+         * \brief The state of the DIRA when it was acquired.
+         */
+        uint32_t const dira_initial_;
+
+        /**
+         * \brief The state of the OUTA when it was acquired.
+         */
+        uint32_t const outa_initial_;
+};
+
+LED::LED( unsigned int const pin ) :
+    mask_( 1 << pin ),
+    dira_initial_( DIRA ),
+    outa_initial_( OUTA )
 {
-    // calculate the bitmask for toggling the blink pin
-    uint32_t const blink_mask = 1 << BLINK_PIN;
+    // configure the pin as an output, initially driven low
+    OUTA &= ~mask_;
+    DIRA |=  mask_;
 
-    // configure the blink pin as an output
-    DIRA |= blink_mask;
+    return;
+}
 
-    // toggle the blink pin at 1 Hz
-    for ( ;; ) {
-        // wait 0.5 seconds
-        waitcnt( CNT + CLKFREQ / 2 );
+LED::~LED()
+{
+    // restore the pin resources to their prior state
+    if ( dira_initial_ & mask_ ) { DIRA |=  mask_; }
+    else                         { DIRA &= ~mask_; }
 
-        // toggle the state of the blink pin
-        OUTA ^= blink_mask;
+    if ( outa_initial_ & mask_ ) { OUTA |=  mask_; }
+    else                         { OUTA &= ~mask_; }
+
+    return;
+}
+
+void LED::toggle( void )
+{
+    // toggle the state of the LED pin
+    OUTA ^= mask_;
+
+    return;
+}
+
+/**
+ * \brief Convert a period in milliseconds to a number of clock ticks.
+ *
+ * \param[in] The period, in milliseconds to convert.
+ *
+ * \return The number of clock ticks in period.
+ */
+uint32_t ms_to_ticks( unsigned int ms )
+{
+    return ( CLKFREQ / 1000U ) * ms;
+}
+
+/**
+ * \brief Blink a LED.
+ *
+ * \param[in] led The LED to blink.
+ * \param[in] n The number of times to blink the LED. If n is zero, the LED will be
+ *            blinked infinitely. If n is greater than UINT_MAX / 2, no LED will be
+ *            blinked.
+ * \param[in] period The blinking period in milliseconds. If period is less than 2, no LED
+ *            will be blinked.
+ */
+static void blink( LED & led, unsigned int n, unsigned int period )
+{
+    // ensure function pre-conditions are met
+    bool error = n > UINT_MAX / 2 ? true
+               : period < 2       ? true
+                                  : false;
+
+    if ( error ) { return; }
+
+    // initialize the timing parameters
+    uint32_t half_period_ticks = ms_to_ticks( period / 2 );
+    uint32_t next_cnt          = half_period_ticks + CNT;
+
+    // blink the LED
+    for ( unsigned int i = 0; n == 0 || i < 2 * n; ++i ) {
+        // wait half a period
+        next_cnt = waitcnt2( next_cnt, half_period_ticks );
+
+        // toggle the state of the LED
+        led.toggle();
 
     } // for
+
+    return;
+}
+
+/**
+ * \brief Main loop.
+ *
+ * \return N/A, enters an infinite loop once blinking is complete.
+ */
+int main( void )
+{
+    // create a new scope so that the LED will be destructed when no longer needed
+    {
+        // create and configure the LED
+        LED led( BLINK_PIN );
+
+        // blink the LED
+        blink( led, BLINK_CNT, BLINK_PERIOD );
+    }
+
+    // infinite loop
+    for ( ;; ) {}
 
     return 0;
 }

@@ -24,6 +24,8 @@ add_executable(
 target_compile_definitions(
     example-c++-blink
     PRIVATE BLINK_PIN=${BLINK_PIN}
+    PRIVATE BLINK_CNT=${BLINK_CNT}
+    PRIVATE BLINK_PERIOD=${BLINK_PERIOD}
 )
 parallax_p8x32a_add_load_target(
     example-c++-blink

@@ -35,12 +35,9 @@ if( WRITE )
 endif( WRITE )
 
 # add a blink pin option for the blink example programs
-set( BLINK_PIN 0 CACHE STRING "Blink example program blink pin" )
-if( NOT BLINK_PIN MATCHES "^([0-9]|1[0-9]|2[0-7])$" )
-    message( FATAL_ERROR "BLINK_PIN must be a number between 0 and 27 inclusive" )
-
-endif( NOT BLINK_PIN MATCHES "^([0-9]|1[0-9]|2[0-7])$" )
-
+set( BLINK_PIN    "0"    CACHE STRING "Blink example program blink pin" )
+set( BLINK_CNT    "0"    CACHE STRING "Blink example program blink count (0 == infinite)" )
+set( BLINK_PERIOD "1000" CACHE STRING "Blink example program blink period in milliseconds" )
 
 # configure compilation and linking
 set(
