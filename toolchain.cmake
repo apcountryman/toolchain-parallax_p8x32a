@@ -24,30 +24,30 @@ set( CMAKE_SYSTEM_PROCESSOR "Parallax P8X32A" )
 # add toolchain specific CMake modules to the CMake modules path
 list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules" )
 
+# mark the toolchain file as advanced
+mark_as_advanced( CMAKE_TOOLCHAIN_FILE )
+
+# mark unused, built-in CMake variables as advanced
+mark_as_advanced( CMAKE_INSTALL_PREFIX )
+
 # locate build tools
-find_program( PARALLAX_P8X32A_C_COMPILER   propeller-elf-gcc )
-find_program( PARALLAX_P8X32A_CXX_COMPILER propeller-elf-g++ )
-find_program( PARALLAX_P8X32A_LINKER       propeller-elf-ld )
-find_program( PARALLAX_P8X32A_NM           propeller-elf-nm )
-find_program( PARALLAX_P8X32A_OBJCOPY      propeller-elf-objcopy )
-find_program( PARALLAX_P8X32A_OBJDUMP      propeller-elf-objdump )
-find_program( PARALLAX_P8X32A_RANLIB       propeller-elf-ranlib )
-find_program( PARALLAX_P8X32A_STRIP        propeller-elf-strip )
+find_program( CMAKE_C_COMPILER      propeller-elf-gcc )
+find_program( CMAKE_CXX_COMPILER    propeller-elf-g++ )
+find_program( CMAKE_COGCXX_COMPILER propeller-elf-g++ )
+find_program( CMAKE_LINKER          propeller-elf-ld )
+find_program( CMAKE_NM              propeller-elf-nm )
+find_program( CMAKE_OBJCOPY         propeller-elf-objcopy )
+find_program( CMAKE_OBJDUMP         propeller-elf-objdump )
+find_program( CMAKE_RANLIB          propeller-elf-ranlib )
+find_program( CMAKE_STRIP           propeller-elf-strip )
+
+mark_as_advanced( CMAKE_COGCXX_COMPILER )
 
 # locate load tools
-find_program( PARALLAX_P8X32A_LOADER       propeller-load )
+find_program( PARALLAX_P8X32A_LOADER propeller-load )
+mark_as_advanced( PARALLAX_P8X32A_LOADER )
 
-# configure CMake tools
-set( CMAKE_C_COMPILER   ${PARALLAX_P8X32A_C_COMPILER} )
-set( CMAKE_CXX_COMPILER ${PARALLAX_P8X32A_CXX_COMPILER} )
-set( CMAKE_LINKER       ${PARALLAX_P8X32A_LINKER} )
-set( CMAKE_NM           ${PARALLAX_P8X32A_NM} )
-set( CMAKE_OBJCOPY      ${PARALLAX_P8X32A_OBJCOPY} )
-set( CMAKE_OBJDUMP      ${PARALLAX_P8X32A_OBJDUMP} )
-set( CMAKE_RANLIB       ${PARALLAX_P8X32A_RANLIB} )
-set( CMAKE_STRIP        ${PARALLAX_P8X32A_STRIP} )
-
-# configure the Parallax P8X32A memory model
+# provide an optional memory model configuration variable
 set(
     PARALLAX_P8X32A_MEMORY_MODELS
     "cog"

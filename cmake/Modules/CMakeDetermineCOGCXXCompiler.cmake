@@ -16,3 +16,13 @@
 # Description: Find the COG C++ compiler and configure CMakeCOGCXXCompiler.cmake.in.
 
 message( STATUS "CMakeDetermineCOGCXXCompiler.cmake" )
+
+# insist that the COG C++ compiler be provided by the user or a toolchain
+if( NOT CMAKE_COGCXX_COMPILER )
+    message( FATAL_ERROR "CMAKE_COGCXX_COMPILER must be set by the user or a toolchain" )
+
+endif( NOT CMAKE_COGCXX_COMPILER )
+
+# TODO: Not sure why this is required, guessing it allows specification of the COG C++
+#       compiler using an environment variable?
+set( CMAKE_COGCXX_COMPILER_ENV_VAR "COGCXX" )
