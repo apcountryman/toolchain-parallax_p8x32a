@@ -21,6 +21,9 @@ message( STATUS "toolchain.cmake" )
 set( CMAKE_SYSTEM_NAME "Generic" )
 set( CMAKE_SYSTEM_PROCESSOR "Parallax P8X32A" )
 
+# add toolchain specific CMake modules to the CMake modules path
+list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules" )
+
 # locate build tools
 find_program( PARALLAX_P8X32A_C_COMPILER   propeller-elf-gcc )
 find_program( PARALLAX_P8X32A_CXX_COMPILER propeller-elf-g++ )
