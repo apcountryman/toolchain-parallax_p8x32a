@@ -15,4 +15,4 @@
 # File: CMakeCOGCXXCompiler.cmake.in
 # Description: Store COG C++ compiler information.
 
-message( STATUS "CMakeCOGCXXCompiler.cmake.in" )
+message( STATUS "CMakeCOGCXXCompiler.cmake.in / CMakeCOGCXXCompiler.cmake" )

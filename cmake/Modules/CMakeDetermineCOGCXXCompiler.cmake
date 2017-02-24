@@ -23,6 +23,13 @@ if( NOT CMAKE_COGCXX_COMPILER )
 
 endif( NOT CMAKE_COGCXX_COMPILER )
 
+# store COG C++ compiler information
+configure_file(
+    ${CMAKE_CURRENT_LIST_DIR}/CMakeCOGCXXCompiler.cmake.in
+    ${CMAKE_PLATFORM_INFO_DIR}/CMakeCOGCXXCompiler.cmake
+    @ONLY
+)
+
 # TODO: Not sure why this is required, guessing it allows specification of the COG C++
 #       compiler using an environment variable?
 set( CMAKE_COGCXX_COMPILER_ENV_VAR "COGCXX" )
