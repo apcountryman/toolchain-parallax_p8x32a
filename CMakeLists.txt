@@ -17,7 +17,9 @@
 #       toolchain example programs.
 
 cmake_minimum_required( VERSION 3.0.2 )
-project( toolchain-parallax_p8x32a C CXX )
+message( STATUS "CMakeLists.txt - pre project()" )
+project( toolchain-parallax_p8x32a C CXX COGCXX )
+message( STATUS "CMakeLists.text - post project()" )
 
 # version
 set( TOOLCHAIN_PARALLAX_P8X32A_MAJOR 0 )
