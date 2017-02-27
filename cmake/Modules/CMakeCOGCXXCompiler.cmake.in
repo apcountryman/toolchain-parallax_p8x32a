@@ -16,3 +16,6 @@
 # Description: Store COG C++ compiler information.
 
 message( STATUS "CMakeCOGCXXCompiler.cmake.in / CMakeCOGCXXCompiler.cmake" )
+
+set( CMAKE_COGCXX_IGNORE_EXTENSIONS inl;h;H;hpp;GPP;o;O;obj;OBJ;cog;COG;def;DEF;rc;RC )
+set( CMAKE_COGCXX_SOURCE_FILE_EXTENSIONS cogcc;COGCC;cogcpp;COGCPP )

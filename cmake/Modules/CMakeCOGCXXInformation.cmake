@@ -16,3 +16,5 @@
 # Description: Set up rule variables for COG C++.
 
 message( STATUS "CMakeCOGCXXInformation.cmake" )
+
+set( CMAKE_COGCXX_OUTPUT_EXTENSION .cog )
