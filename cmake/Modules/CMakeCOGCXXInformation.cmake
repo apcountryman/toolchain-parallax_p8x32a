@@ -17,4 +17,11 @@
 
 message( STATUS "CMakeCOGCXXInformation.cmake" )
 
+# object extension
 set( CMAKE_COGCXX_OUTPUT_EXTENSION .cog )
+
+# object compilation
+set(
+    CMAKE_COGCXX_COMPILE_OBJECT
+    "<CMAKE_COGCXX_COMPILER> <DEFINES> <FLAGS> -o <OBJECT> <SOURCE>"
+)
