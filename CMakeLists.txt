@@ -58,6 +58,13 @@ set(
     -Werror -Wall -Wpointer-arith \
     "
 )
+set(
+    CMAKE_COGCXX_FLAGS
+    "${CMAKE_COGCXX_FLAGS} \
+    -std=c++03 \
+    -Werror -Wall -Wpointer-arith \
+    "
+)
 
 # build the examples
 add_subdirectory( examples )

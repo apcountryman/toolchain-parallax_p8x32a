@@ -20,6 +20,9 @@ message( STATUS "CMakeCOGCXXInformation.cmake" )
 # object extension
 set( CMAKE_COGCXX_OUTPUT_EXTENSION .cog )
 
+# initialize flags
+set( CMAKE_COGCXX_FLAGS "-Wno-main -mcog -xc++" )
+
 # object compilation
 set(
     CMAKE_COGCXX_COMPILE_OBJECT
