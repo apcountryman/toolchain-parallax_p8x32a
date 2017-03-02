@@ -27,4 +27,5 @@ set( CMAKE_COGCXX_FLAGS "-Wno-main -mcog -xc++" )
 set(
     CMAKE_COGCXX_COMPILE_OBJECT
     "<CMAKE_COGCXX_COMPILER> <DEFINES> <FLAGS> -o <OBJECT> <SOURCE>"
+    "${CMAKE_OBJCOPY} --localize-text --rename-section .text=led_blinker.cog <OBJECT>"
 )
