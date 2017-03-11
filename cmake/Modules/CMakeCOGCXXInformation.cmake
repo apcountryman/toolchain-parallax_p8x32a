@@ -20,8 +20,35 @@ message( STATUS "CMakeCOGCXXInformation.cmake" )
 # object extension
 set( CMAKE_COGCXX_OUTPUT_EXTENSION .cog )
 
+# compiler name without platform specific extensions
+set( CMAKE_BASE_NAME g++ )
+
+# load platform specific information
+include( Platform/${CMAKE_SYSTEM_NAME}-${CMAKE_BASE_NAME}-${CMAKE_SYSTEM_PROCESSOR} REQUIRED )
+
 # initialize flags
-set( CMAKE_COGCXX_FLAGS "-Wno-main -mcog -xc++" )
+set( CMAKE_COGCXX_FLAGS_INIT "$ENV{COGCXXFLAGS} ${CMAKE_COGCXX_FLAGS_INIT}" )
+set(
+    CMAKE_COGCXX_FLAGS "${CMAKE_COGCXX_FLAGS_INIT}"
+    CACHE STRING "Flags used by the compiler during all build types."
+)
+
+set(
+    CMAKE_COGCXX_FLAGS_DEBUG "${CMAKE_COGCXX_FLAGS_DEBUG_INIT}"
+    CACHE STRING "Flags used by the compiler during debug builds."
+)
+set(
+    CMAKE_COGCXX_FLAGS_MINSIZEREL "${CMAKE_COGCXX_FLAGS_MINSIZEREL_INIT}"
+    CACHE STRING "Flags used by the compiler during release builds for minimum size."
+)
+set(
+    CMAKE_COGCXX_FLAGS_RELEASE "${CMAKE_COGCXX_FLAGS_RELEASE_INIT}"
+    CACHE STRING "Flags used by the compiler during release builds."
+)
+set(
+    CMAKE_COGCXX_FLAGS_RELWITHDEBINFO "${CMAKE_COGCXX_FLAGS_RELWITHDEBINFO_INIT}"
+    CACHE STRING "Flags used by the compiler during release builds with debug info."
+)
 
 # object compilation
 set(

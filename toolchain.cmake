@@ -19,7 +19,7 @@ message( STATUS "toolchain.cmake" )
 
 #
 set( CMAKE_SYSTEM_NAME "Generic" )
-set( CMAKE_SYSTEM_PROCESSOR "Parallax P8X32A" )
+set( CMAKE_SYSTEM_PROCESSOR "Parallax-P8X32A" )
 
 # add toolchain specific CMake modules to the CMake modules path
 list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules" )

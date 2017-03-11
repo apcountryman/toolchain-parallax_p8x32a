@@ -16,16 +16,65 @@
 
 /**
  * \file led_blinker.cogcc
- * \brief LED blinker implementation.
+ * \brief LED blinker subprogram implementation.
  */
+
+#include <limits.h>
+#include <propeller.h>
+
+#include "led_blinker_mailbox.h"
+
+// address CLKFREQ declaration error to allow CLKFREQ use in cog subprogram
+#undef CLKFREQ
+#define CLKFREQ (*(int *)0)
 
 /**
  * \brief Blink an LED.
  *
  * \param[in] mailbox Blink parameters and completion signal.
+ *
+ * \return N/A, enters an infinite loop once blinking is complete.
  */
-__attribute__(( naked )) int main( void * mailbox )
+__attribute__(( naked )) int main( LED_Blinker_Mailbox * mailbox )
 {
+    // ensure subprogram pre-conditions are met
+    bool error = !mailbox                         ? true
+               :  mailbox->complete_              ? true
+               :  mailbox->pin_    > 31           ? true
+               :  mailbox->n_      > UINT_MAX / 2 ? true
+               :  mailbox->period_ < 2            ? true
+                                                  : false;
+
+    // blink the LED if there are no errors
+    if ( !error ) {
+        // initialize the blink count
+        unsigned int const n = mailbox->n_;
+
+        // calculate the bit mask for interacting with the I/O registers
+        uint32_t const mask = 1 << mailbox->pin_;
+
+        // configure the pin as an output, initially driven low
+        OUTA &= ~mask;
+        DIRA |=  mask;
+
+        // initialize the timing parameters
+        uint32_t const half_period_ticks = ( CLKFREQ / 1000U ) * ( mailbox->period_ / 2 );
+        uint32_t       next_cnt          = half_period_ticks + CNT;
+
+        for ( unsigned int i = 0; n == 0 || i < 2 *n; ++i ) {
+            // wait half a period
+            next_cnt = waitcnt2( next_cnt, half_period_ticks );
+
+            // toggle the LED
+            OUTA ^= mask;
+
+        } // for
+
+    } // if
+
+    // signal blinking completion if a mailbox was provided
+    if ( mailbox ) { mailbox->complete_ = true; }
+
     // infinite loop
     for ( ;; ) {}
 }

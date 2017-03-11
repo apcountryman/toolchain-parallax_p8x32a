@@ -54,15 +54,17 @@ set(
     CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} \
     -m${PARALLAX_P8X32A_MEMORY_MODEL} \
-    -std=c++03 \
+    -std=gnu++0x \
     -Werror -Wall -Wpointer-arith \
+    -mfcache -fno-exceptions -fno-rtti \
     "
 )
 set(
     CMAKE_COGCXX_FLAGS
     "${CMAKE_COGCXX_FLAGS} \
-    -std=c++03 \
+    -std=gnu++0x \
     -Werror -Wall -Wpointer-arith \
+    -fno-exceptions -fno-rtti \
     "
 )
 
