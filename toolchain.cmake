@@ -39,7 +39,7 @@ find_program( CMAKE_STRIP        propeller-elf-strip )
 find_program( PARALLAX_P8X32A_LOADER propeller-load )
 mark_as_advanced( PARALLAX_P8X32A_LOADER )
 
-# configure the Parallax P8X32A memory model
+# provide an optional memory model configuration variable
 set(
     PARALLAX_P8X32A_MEMORY_MODELS
     "cog"
