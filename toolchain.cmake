@@ -15,9 +15,15 @@
 # File: toolchain.cmake
 # Description: Parallax P8X32A Propeller microcontroller CMake toolchain.
 
-#
+# system information
 set( CMAKE_SYSTEM_NAME "Generic" )
 set( CMAKE_SYSTEM_PROCESSOR "Parallax-P8X32A" )
+
+# mark the toolchain file as advanced
+mark_as_advanced( CMAKE_TOOLCHAIN_FILE )
+
+# mark unused, built-in CMake variables as advanced
+mark_as_advanced( CMAKE_INSTALL_PREFIX )
 
 # locate build tools
 find_program( CMAKE_C_COMPILER   propeller-elf-gcc )
@@ -31,6 +37,7 @@ find_program( CMAKE_STRIP        propeller-elf-strip )
 
 # locate load tools
 find_program( PARALLAX_P8X32A_LOADER propeller-load )
+mark_as_advanced( PARALLAX_P8X32A_LOADER )
 
 # configure the Parallax P8X32A memory model
 set(
