@@ -17,7 +17,7 @@
 
 #
 set( CMAKE_SYSTEM_NAME "Generic" )
-set( CMAKE_SYSTEM_PROCESSOR "Parallax P8X32A" )
+set( CMAKE_SYSTEM_PROCESSOR "Parallax-P8X32A" )
 
 # locate build tools
 find_program( PARALLAX_P8X32A_C_COMPILER   propeller-elf-gcc )
