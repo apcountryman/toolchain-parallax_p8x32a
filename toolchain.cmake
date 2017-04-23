@@ -20,27 +20,17 @@ set( CMAKE_SYSTEM_NAME "Generic" )
 set( CMAKE_SYSTEM_PROCESSOR "Parallax-P8X32A" )
 
 # locate build tools
-find_program( PARALLAX_P8X32A_C_COMPILER   propeller-elf-gcc )
-find_program( PARALLAX_P8X32A_CXX_COMPILER propeller-elf-g++ )
-find_program( PARALLAX_P8X32A_LINKER       propeller-elf-ld )
-find_program( PARALLAX_P8X32A_NM           propeller-elf-nm )
-find_program( PARALLAX_P8X32A_OBJCOPY      propeller-elf-objcopy )
-find_program( PARALLAX_P8X32A_OBJDUMP      propeller-elf-objdump )
-find_program( PARALLAX_P8X32A_RANLIB       propeller-elf-ranlib )
-find_program( PARALLAX_P8X32A_STRIP        propeller-elf-strip )
+find_program( CMAKE_C_COMPILER   propeller-elf-gcc )
+find_program( CMAKE_CXX_COMPILER propeller-elf-g++ )
+find_program( CMAKE_LINKER       propeller-elf-ld )
+find_program( CMAKE_NM           propeller-elf-nm )
+find_program( CMAKE_OBJCOPY      propeller-elf-objcopy )
+find_program( CMAKE_OBJDUMP      propeller-elf-objdump )
+find_program( CMAKE_RANLIB       propeller-elf-ranlib )
+find_program( CMAKE_STRIP        propeller-elf-strip )
 
 # locate load tools
-find_program( PARALLAX_P8X32A_LOADER       propeller-load )
-
-# configure CMake tools
-set( CMAKE_C_COMPILER   ${PARALLAX_P8X32A_C_COMPILER} )
-set( CMAKE_CXX_COMPILER ${PARALLAX_P8X32A_CXX_COMPILER} )
-set( CMAKE_LINKER       ${PARALLAX_P8X32A_LINKER} )
-set( CMAKE_NM           ${PARALLAX_P8X32A_NM} )
-set( CMAKE_OBJCOPY      ${PARALLAX_P8X32A_OBJCOPY} )
-set( CMAKE_OBJDUMP      ${PARALLAX_P8X32A_OBJDUMP} )
-set( CMAKE_RANLIB       ${PARALLAX_P8X32A_RANLIB} )
-set( CMAKE_STRIP        ${PARALLAX_P8X32A_STRIP} )
+find_program( PARALLAX_P8X32A_LOADER propeller-load )
 
 # configure the Parallax P8X32A memory model
 set(
