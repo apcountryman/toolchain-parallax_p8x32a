@@ -117,7 +117,7 @@ void LED::toggle( void )
 /**
  * \brief Convert a period in milliseconds to a number of clock ticks.
  *
- * \param[in] The period, in milliseconds to convert.
+ * \param[in] ms The period, in milliseconds, to convert.
  *
  * \return The number of clock ticks in period.
  */
