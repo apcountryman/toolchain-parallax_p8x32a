@@ -21,7 +21,7 @@ project( toolchain-parallax_p8x32a C CXX )
 
 # version
 set( TOOLCHAIN_PARALLAX_P8X32A_MAJOR 0 )
-set( TOOLCHAIN_PARALLAX_P8X32A_MINOR 0 )
+set( TOOLCHAIN_PARALLAX_P8X32A_MINOR 1 )
 set( TOOLCHAIN_PARALLAX_P8X32A_PATCH 0 )
 
 # add a board option for loading
