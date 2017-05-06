@@ -2,6 +2,16 @@
 toolchain-parallax_p8x32a is a CMake toolchain for the Parallax P8X32A Propeller
 microcontroller.
 
+## Obtaining the Source Code
+HTTPS:
+```
+git clone https://github.com/apcountryman/toolchain-parallax_p8x32a.git
+```
+SSH:
+```
+git clone git@github.com:apcountryman/toolchain-parallax_p8x32a.git
+```
+
 ## git Hooks
 To install this repository's git hooks, run the `install` script which is located in the
 `hooks` directory.
