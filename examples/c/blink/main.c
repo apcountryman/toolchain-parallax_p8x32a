@@ -187,7 +187,7 @@ int main( void )
 {
     // configure the LED;
     LED_Attributes attributes = {};
-    LED led = led_construct( &attributes, BLINK_PIN );
+    LED led = led_construct( &attributes, BLINK_LED_PIN );
 
     // blink the LED
     blink( led, BLINK_CNT, BLINK_PERIOD );

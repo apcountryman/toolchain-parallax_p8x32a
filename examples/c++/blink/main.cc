@@ -176,7 +176,7 @@ int main( void )
     // create a new scope so that the LED will be destructed when no longer needed
     {
         // create and configure the LED
-        LED led( BLINK_PIN );
+        LED led( BLINK_LED_PIN );
 
         // blink the LED
         blink( led, BLINK_CNT, BLINK_PERIOD );

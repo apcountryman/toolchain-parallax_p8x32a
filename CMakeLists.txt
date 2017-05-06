@@ -25,9 +25,9 @@ set( TOOLCHAIN_PARALLAX_P8X32A_MINOR 1 )
 set( TOOLCHAIN_PARALLAX_P8X32A_PATCH 0 )
 
 # add options for configuring the blink example programs
-set( BLINK_PIN    "0"    CACHE STRING "Blink example program blink pin" )
-set( BLINK_CNT    "0"    CACHE STRING "Blink example program blink count (0 == infinite)" )
-set( BLINK_PERIOD "1000" CACHE STRING "Blink example program blink period in milliseconds" )
+set( BLINK_LED_PIN "0"    CACHE STRING "Blink example program LED pin" )
+set( BLINK_CNT     "0"    CACHE STRING "Blink example program blink count (0 == infinite)" )
+set( BLINK_PERIOD  "1000" CACHE STRING "Blink example program blink period in milliseconds" )
 
 # configure compilation and linking
 set(
