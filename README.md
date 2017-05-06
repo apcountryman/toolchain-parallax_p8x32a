@@ -18,6 +18,29 @@ git clone git@github.com:apcountryman/toolchain-parallax_p8x32a.git
 - Parallax P8X32A Propeller Binutils ? + (tested with 2.21)
 - propeller-load ? + (program does not report version)
 
+## Usage
+
+### Finding Tools
+This toolchain expects to find `propeller-elf-gcc`, `propeller-elf-g++`, the associated
+binary utilities, and `propeller-load` in the path(s) searched by CMake `find_program()`.
+If the toolchain fails to locate tools, consult the documentation of `find_program()`.
+
+### Addling Loader Targets
+To add load targets for an executable, use the `parallax_p8x32a_add_load_target()`
+function provided by the toolchain. For an executable `foo`, this function adds build
+target `foo-load` for loading the executable.
+
+`parallax_p8x32a_add_load_target()` has only one required parameter, the name of the
+executable to create load targets for. For details on the optional arguments, and what
+they default to when not provided, consult `parallax_p8x32a_add_load_target()`'s
+documentation found in the `toolchain.cmake` file.
+
+### Optional CMake Variables
+In addition to providing a method for adding load targets for executables, an optional
+convenience cache variable is provided for setting the used memory model. For details on
+this variable, see the `toolchain.cmake` file. Usage of this variable is demonstrated in
+the root `CMakeLists.txt` file for the example programs.
+
 ## git Hooks
 To install this repository's git hooks, run the `install` script which is located in the
 `hooks` directory.
