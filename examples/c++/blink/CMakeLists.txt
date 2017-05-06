@@ -29,6 +29,12 @@ target_compile_definitions(
 )
 parallax_p8x32a_add_load_target(
     example-c++-blink
-    ${WRITE_EEPROM} RUN
     BOARD ${BOARD}
+    ${LOAD_DEFINE}
+    ${LOAD_EEPROM}
+    ${LOAD_INCLUDE}
+    ${LOAD_PORT}
+    RUN
+    ${LOAD_SLOW}
+    ${LOAD_VERBOSE}
 )

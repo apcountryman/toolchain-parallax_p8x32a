@@ -23,6 +23,13 @@ add_executable(
 )
 parallax_p8x32a_add_load_target(
     example-c-hello_world
-    ${WRITE_EEPROM} RUN TERMINAL
     BOARD ${BOARD}
+    ${LOAD_DEFINE}
+    ${LOAD_EEPROM}
+    ${LOAD_INCLUDE}
+    ${LOAD_PORT}
+    RUN
+    ${LOAD_SLOW}
+    TERMINAL DEFAULT
+    ${LOAD_VERBOSE}
 )

@@ -27,12 +27,47 @@ set( TOOLCHAIN_PARALLAX_P8X32A_PATCH 0 )
 # add a board option for loading
 set( BOARD "eeprom" CACHE STRING "The board type to use when loading example programs" )
 
+# add a configuration variable define option for loading
+set( BOARD_CONFIG "" CACHE STRING "Patch board config variables when loading example programs" )
+if( NOT "${BOARD_CONFIG}" STREQUAL "" )
+    set( LOAD_DEFINE "DEFINE" ${BOARD_CONFIG} )
+
+endif( NOT "${BOARD_CONFIG}" STREQUAL "" )
+
 # add a burn option for loading
-option( WRITE "Write example programs to EEPROM when loading" OFF )
+option( WRITE "Write example programs to EEPROM when loading example programs" OFF )
 if( WRITE )
-    set( WRITE_EEPROM "EEPROM" )
+    set( LOAD_EEPROM "EEPROM" )
 
 endif( WRITE )
+
+# add an include path option for loading
+set( BOARD_INCLUDE "" CACHE STRING "Add board paths to search when loading example programs" )
+if( NOT "${BOARD_INCLUDE}" STREQUAL "" )
+    set( LOAD_INCLUDE "INCLUDE" ${BOARD_INCLUDE} )
+
+endif( NOT "${BOARD_INCLUDE}" STREQUAL "" )
+
+# add a port option for loading
+set( PORT "" CACHE STRING "The serial port to use when loading example programs" )
+if( NOT "${PORT}" STREQUAL "" )
+    set( LOAD_PORT "PORT" ${PORT} )
+
+endif( NOT "${PORT}" STREQUAL "" )
+
+# add a delay option for loading
+set( DELAY "" CACHE STRING "Delay to use when loading example programs" )
+if ( NOT "${DELAY}" STREQUAL "" )
+    set( LOAD_SLOW "SLOW" ${DELAY} )
+
+endif ( NOT "${DELAY}" STREQUAL "" )
+
+# add a verbosity option for loading
+option( VERBOSE "Enable verbose output when loading example programs" OFF )
+if( VERBOSE )
+    set( LOAD_VERBOSE "VERBOSE" )
+
+endif( VERBOSE )
 
 # add a blink pin option for the blink example programs
 set( BLINK_PIN    "0"    CACHE STRING "Blink example program blink pin" )
