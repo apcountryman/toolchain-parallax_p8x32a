@@ -31,15 +31,15 @@ function provided by the toolchain. For an executable `foo`, this function adds 
 target `foo-load` for loading the executable.
 
 `parallax_p8x32a_add_load_target()` has only one required parameter, the name of the
-executable to create load targets for. For details on the optional arguments, and what
+executable to create a load target for. For details on the optional arguments, and what
 they default to when not provided, consult `parallax_p8x32a_add_load_target()`'s
 documentation found in the `toolchain.cmake` file.
 
 ### Optional CMake Variables
-In addition to providing a method for adding load targets for executables, an optional
-convenience cache variable is provided for setting the used memory model. For details on
-this variable, see the `toolchain.cmake` file. Usage of this variable is demonstrated in
-the root `CMakeLists.txt` file for the example programs.
+In addition to providing a method for adding load targets for executables, optional
+convenience cache variables are provided for controlling compilation and loading. For
+details on what variables are available for use, see the `toolchain.cmake` file. Usage of
+these variables is demonstrated in the `CMakeLists.txt` files for the example programs.
 
 ## git Hooks
 To install this repository's git hooks, run the `install` script which is located in the
