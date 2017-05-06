@@ -12,6 +12,12 @@ SSH:
 git clone git@github.com:apcountryman/toolchain-parallax_p8x32a.git
 ```
 
+## Dependencies
+- CMake 3.0.2 +
+- propeller-elf-gcc/propeller-elf-g++ ? + (tested with 4.6.1)
+- Parallax P8X32A Propeller Binutils ? + (tested with 2.21)
+- propeller-load ? + (program does not report version)
+
 ## git Hooks
 To install this repository's git hooks, run the `install` script which is located in the
 `hooks` directory.
