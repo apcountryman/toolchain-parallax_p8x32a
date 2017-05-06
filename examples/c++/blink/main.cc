@@ -46,26 +46,31 @@ class LED {
         ~LED();
 
         /**
+         * \brief Copy construction prohibited.
+         */
+        LED( LED const & ) = delete;
+
+        /**
+         * \brief Copy assignment prohibited.
+         */
+        LED & operator=( LED const & ) = delete;
+
+        /**
+         * \brief Move construction prohibited.
+         */
+        LED( LED && ) = delete;
+
+        /**
+         * \brief Move assignment prohibited.
+         */
+        LED & operator=( LED && ) = delete;
+
+        /**
          * \brief Toggle the state of the LED.
          */
         void toggle( void );
 
     private:
-        /**
-         * \brief Default construction prohibited.
-         */
-        LED();
-
-        /**
-         * \brief Copy construction prohibited.
-         */
-        LED( LED const & led );
-
-        /**
-         * \brief Copy assignment prohibited.
-         */
-        LED & operator=( LED const & led );
-
         /**
          * \brief Bit mask for interacting with the I/O registers.
          */
