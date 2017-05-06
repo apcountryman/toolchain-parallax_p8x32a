@@ -79,7 +79,7 @@ set(
     CMAKE_C_FLAGS
     "${CMAKE_C_FLAGS} \
     -m${PARALLAX_P8X32A_MEMORY_MODEL} \
-    --std=gnu99 \
+    --std=gnu1x \
     -Werror -Wall -Wpointer-arith -Wstrict-prototypes \
     -mfcache -fno-exceptions \
     "
