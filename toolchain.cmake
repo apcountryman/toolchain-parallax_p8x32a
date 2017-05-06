@@ -181,12 +181,13 @@ function( parallax_p8x32a_add_load_target EXECUTABLE )
     )
 
     # ensure there are no unrecognized arguments
-    if( ${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS} )
+    if( NOT "${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS}" STREQUAL "" )
         message(
             FATAL_ERROR
             "'${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS}' are not recognized arguments"
         )
-    endif( ${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS} )
+
+    endif( NOT "${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS}" STREQUAL "" )
 
     # configure loader flags
     set( loader_flags "" )
