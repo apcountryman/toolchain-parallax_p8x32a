@@ -144,7 +144,7 @@ function( parallax_p8x32a_add_load_target EXECUTABLE )
         )
     endif( ${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS} )
 
-    # configure loader arguments
+    # configure loader flags
     set( loader_flags "" )
 
     if( ${parallax_p8x32a_add_load_target_EEPROM} )

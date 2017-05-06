@@ -19,9 +19,9 @@
  * \brief Blink C++ example program.
  */
 
+#include <limits.h>
 #include <propeller.h>
 #include <stdint.h>
-#include <limits.h>
 
 /**
  * \brief A LED.

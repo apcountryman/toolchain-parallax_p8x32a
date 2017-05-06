@@ -28,7 +28,7 @@ set( TOOLCHAIN_PARALLAX_P8X32A_PATCH 0 )
 set( BOARD "eeprom" CACHE STRING "The board type to use when loading example programs" )
 
 # add a configuration variable define option for loading
-set( BOARD_CONFIG "" CACHE STRING "Patch board config variables when loading example programs" )
+set( BOARD_CONFIG "" CACHE STRING "Board config variable patches to use when loading example programs" )
 if( NOT "${BOARD_CONFIG}" STREQUAL "" )
     set( LOAD_DEFINE "DEFINE" ${BOARD_CONFIG} )
 
@@ -69,7 +69,7 @@ if( VERBOSE )
 
 endif( VERBOSE )
 
-# add a blink pin option for the blink example programs
+# add options for configuring the blink example programs
 set( BLINK_PIN    "0"    CACHE STRING "Blink example program blink pin" )
 set( BLINK_CNT    "0"    CACHE STRING "Blink example program blink count (0 == infinite)" )
 set( BLINK_PERIOD "1000" CACHE STRING "Blink example program blink period in milliseconds" )
