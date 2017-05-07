@@ -75,7 +75,7 @@ BLINK_CNT
 BLINK_PERIOD
 ```
 
-To load a blink example program to flash, build one of the following make targets:
+To load a blink example program, build one of the following make targets:
 ```
 example-c-blink-load
 example-c++-blink-load
