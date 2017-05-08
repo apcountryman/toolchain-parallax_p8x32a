@@ -62,6 +62,50 @@ if ( ${VALID_MEMORY_MODEL} LESS 0 )
 
 endif ( ${VALID_MEMORY_MODEL} LESS 0 )
 
+# provide optional loader configuration variables
+option( PARALLAX_P8X32A_LOADER_ENABLE_EEPROM_WRITE "Parallax P8X32A loader write to EEPROM" OFF )
+if( ${PARALLAX_P8X32A_LOADER_ENABLE_EEPROM_WRITE} )
+    set( PARALLX_P8X32A_LOADER_EEPROM "EEPROM" )
+
+endif( ${PARALLAX_P8X32A_LOADER_ENABLE_EEPROM_WRITE} )
+
+option( PARALLAX_P8X32A_LOADER_ENABLE_QUIT "Parallax P8X32A loader quit on exit sequence" OFF )
+if( ${PARALLAX_P8X32A_LOADER_ENABLE_QUIT} )
+    set( PARALLAX_P8X32A_LOADER_QUIT "QUIT" )
+
+endif( ${PARALLAX_P8X32A_LOADER_ENABLE_QUIT} )
+
+option( PARALLAX_P8X32A_LOADER_ENABLE_VERBOSE "Parallax P8X32A loader verbose output" OFF )
+if( ${PARALLAX_P8X32A_LOADER_ENABLE_VERBOSE} )
+    set( PARALLAX_P8X32A_LOADER_VERBOSE "VERBOSE" )
+
+endif( ${PARALLAX_P8X32A_LOADER_ENABLE_VERBOSE} )
+
+set(
+    PARALLAX_P8X32A_LOADER_BOARD "eeprom"
+    CACHE STRING "Parallax P8X32A loader board"
+)
+set(
+    PARALLAX_P8X32A_LOADER_DEFINE ""
+    CACHE STRING "Parallax P8X32A loader board configuration patches"
+)
+set(
+    PARALLAX_P8X32A_LOADER_INCLUDE_PATHS ""
+    CACHE STRING "Parallax P8X32A loader board search paths"
+)
+set(
+    PARALLAX_P8X32A_LOADER_PORT ""
+    CACHE STRING "Parallax P8X32A loader port"
+)
+set(
+    PARALLAX_P8X32A_LOADER_SLOW ""
+    CACHE STRING "Parallax P8X32A loader delay"
+)
+set(
+    PARALLAX_P8X32A_LOADER_TERMINAL_BAUD_RATE "DEFAULT"
+    CACHE STRING "Parallax P8X32A loader terminal baudrate"
+)
+
 # Add a load target (<executable>-load) for an executable.
 #
 # SYNOPSIS:
@@ -137,14 +181,15 @@ function( parallax_p8x32a_add_load_target EXECUTABLE )
     )
 
     # ensure there are no unrecognized arguments
-    if( ${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS} )
+    if( NOT "${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS}" STREQUAL "" )
         message(
             FATAL_ERROR
             "'${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS}' are not recognized arguments"
         )
-    endif( ${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS} )
 
-    # configure loader arguments
+    endif( NOT "${parallax_p8x32a_add_load_target_UNPARSED_ARGUMENTS}" STREQUAL "" )
+
+    # configure loader flags
     set( loader_flags "" )
 
     if( ${parallax_p8x32a_add_load_target_EEPROM} )

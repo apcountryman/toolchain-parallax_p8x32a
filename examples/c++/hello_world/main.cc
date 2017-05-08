@@ -24,15 +24,12 @@
 /**
  * \brief Main loop.
  *
- * \return N/A, enters an infinite loop once message printing is complete.
+ * \return 0.
  */
 int main( void )
 {
     // print the message
     printf( "Hello, world!\n" );
-
-    // infinite loop
-    for ( ;; ) {}
 
     return 0;
 }
