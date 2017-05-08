@@ -12,9 +12,12 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitignore
-# Description: Ignore rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain repository.
+# File: CMakeLists.txt
+# Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
+#       toolchain C example programs.
 
-# ignore the build directory
-build/
+# build the blink program
+add_subdirectory( blink )
+
+# build the hello world program
+add_subdirectory( hello_world )

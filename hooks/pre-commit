@@ -18,6 +18,19 @@
 # Description: Pre-commit git hook script for the Parallax P8X32A Propeller
 #       microcontroller CMake toolchain repository.
 
+# hooks directory
+SCRIPT=$( readlink -f $0 )
+HOOKS_DIR=$( dirname $SCRIPT )
+
+# repository root directory
+ROOT_DIR="$HOOKS_DIR"/..
+
+# build directory
+BUILD_DIR="$ROOT_DIR"/build
+
+# Parallax P8X32A  build directory
+BUILD_PARALLAX_P8X32A_DIR="$BUILD_DIR"/parallax_p8x32a
+
 # determine the commit ID to work against
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
     against=HEAD
@@ -28,7 +41,7 @@ else
 fi
 
 # verify file names are portable
-echo -n "pre-commit: checking for non-portable file names ... "
+echo -n "pre-commit: checking for non-portable file names ........ "
 
 if test $( git diff --cached --name-only --diff-filter=A -z $against |
            LC_ALL=C tr -d '[ -~]\0' | wc -c ) != 0; then
@@ -42,13 +55,55 @@ fi
 echo "none"
 
 # verify there are no whitespace errors
-echo -n "pre-commit: checking for whitespace errors ......... "
+echo -n "pre-commit: checking for whitespace errors .............. "
 
 git diff-index --check --cached $against -- >/dev/null 2>&1
 if [[ $? != 0 ]]; then
     echo "error(s) found"
     git diff-index --check --cached $against --
     ( >&2 echo "pre-commit: aborting commit due to whitespace error(s)" )
+    exit 1
+
+fi
+
+echo "none"
+
+# verify there are no Parallax P8X32A build errors
+echo -n "pre-commit: checking for Parallax P8X32A build errors ... "
+
+if [[ ! -d "$BUILD_PARALLAX_P8X32A_DIR" ]]; then
+    mkdir -p "$BUILD_PARALLAX_P8X32A_DIR"
+    if [[ $? != 0 ]]; then
+        echo "error(s) found"
+        ( >&2 echo "pre-commit: aborting commit due to Parallax P8X32A build directory creation failure" )
+        exit 1
+
+    fi
+
+    cd "$BUILD_PARALLAX_P8X32A_DIR"
+    cmake -DCMAKE_TOOLCHAIN_FILE="$ROOT_DIR"/toolchain.cmake "$ROOT_DIR" >/dev/null 2>&1
+    if [[ $? != 0 ]]; then
+        echo "error(s) found"
+        ( >&2 echo "pre-commit: aborting commit due to Parallax P8X32A build CMake error(s)" )
+        exit 1
+
+    fi
+
+fi
+
+cd "$BUILD_PARALLAX_P8X32A_DIR"
+cmake . >/dev/null 2>&1
+if [[ $? != 0 ]]; then
+    echo "error(s) found"
+    ( >&2 echo "pre-commit: aborting commit due to Parallax P8X32A build CMake error(s)" )
+    exit 1
+
+fi
+
+make -j --quiet >/dev/null 2>&1
+if [[ $? != 0 ]]; then
+    echo "error(s) found"
+    ( >&2 echo "pre-commit: aborting commit due to Parallax P8X32A build make error(s)" )
     exit 1
 
 fi
