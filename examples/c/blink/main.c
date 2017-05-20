@@ -134,7 +134,7 @@ static void led_toggle( LED led )
 /**
  * \brief Convert a period in milliseconds to a number of clock ticks.
  *
- * \param[in] The period, in milliseconds to convert.
+ * \param[in] The period, in milliseconds, to convert.
  *
  * \return The number of clock ticks in period.
  */
@@ -187,7 +187,7 @@ int main( void )
 {
     // configure the LED;
     LED_Attributes attributes = {};
-    LED led = led_construct( &attributes, BLINK_PIN );
+    LED led = led_construct( &attributes, BLINK_LED_PIN );
 
     // blink the LED
     blink( led, BLINK_CNT, BLINK_PERIOD );

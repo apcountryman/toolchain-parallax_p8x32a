@@ -19,9 +19,9 @@
  * \brief Blink C++ example program.
  */
 
+#include <limits.h>
 #include <propeller.h>
 #include <stdint.h>
-#include <limits.h>
 
 /**
  * \brief A LED.
@@ -46,26 +46,31 @@ class LED {
         ~LED();
 
         /**
+         * \brief Copy construction prohibited.
+         */
+        LED( LED const & ) = delete;
+
+        /**
+         * \brief Copy assignment prohibited.
+         */
+        LED & operator=( LED const & ) = delete;
+
+        /**
+         * \brief Move construction prohibited.
+         */
+        LED( LED && ) = delete;
+
+        /**
+         * \brief Move assignment prohibited.
+         */
+        LED & operator=( LED && ) = delete;
+
+        /**
          * \brief Toggle the state of the LED.
          */
         void toggle( void );
 
     private:
-        /**
-         * \brief Default construction prohibited.
-         */
-        LED();
-
-        /**
-         * \brief Copy construction prohibited.
-         */
-        LED( LED const & led );
-
-        /**
-         * \brief Copy assignment prohibited.
-         */
-        LED & operator=( LED const & led );
-
         /**
          * \brief Bit mask for interacting with the I/O registers.
          */
@@ -171,7 +176,7 @@ int main( void )
     // create a new scope so that the LED will be destructed when no longer needed
     {
         // create and configure the LED
-        LED led( BLINK_PIN );
+        LED led( BLINK_LED_PIN );
 
         // blink the LED
         blink( led, BLINK_CNT, BLINK_PERIOD );

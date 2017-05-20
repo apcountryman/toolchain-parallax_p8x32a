@@ -24,7 +24,7 @@ add_executable(
 )
 target_compile_definitions(
     example-c++-blink_cog
-    PRIVATE BLINK_PIN=${BLINK_PIN}
+    PRIVATE BLINK_LED_PIN=${BLINK_LED_PIN}
     PRIVATE BLINK_CNT=${BLINK_CNT}
     PRIVATE BLINK_PERIOD=${BLINK_PERIOD}
 )

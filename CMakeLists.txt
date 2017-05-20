@@ -18,36 +18,27 @@
 
 cmake_minimum_required( VERSION 3.0.2 )
 message( STATUS "CMakeLists.txt - pre project()" )
-project( toolchain-parallax_p8x32a C CXX COGCXX )
+project(
+    toolchain-parallax_p8x32a
+    VERSION   0.1.0
+    LANGUAGES C CXX COGCXX
+)
 message( STATUS "CMakeLists.text - post project()" )
 
-# version
-set( TOOLCHAIN_PARALLAX_P8X32A_MAJOR 0 )
-set( TOOLCHAIN_PARALLAX_P8X32A_MINOR 0 )
-set( TOOLCHAIN_PARALLAX_P8X32A_PATCH 0 )
-
-# add a board option for loading
-set( BOARD "eeprom" CACHE STRING "The board type to use when loading example programs" )
-
-# add a burn option for loading
-option( WRITE "Write example programs to EEPROM when loading" OFF )
-if( WRITE )
-    set( WRITE_EEPROM "EEPROM" )
-
-endif( WRITE )
-
-# add a blink pin option for the blink example programs
-set( BLINK_PIN    "0"    CACHE STRING "Blink example program blink pin" )
-set( BLINK_CNT    "0"    CACHE STRING "Blink example program blink count (0 == infinite)" )
-set( BLINK_PERIOD "1000" CACHE STRING "Blink example program blink period in milliseconds" )
+# add options for configuring the blink example programs
+set( BLINK_LED_PIN "0"    CACHE STRING "Blink example program LED pin" )
+set( BLINK_CNT     "0"    CACHE STRING "Blink example program blink count (0 == infinite)" )
+set( BLINK_PERIOD  "1000" CACHE STRING "Blink example program blink period in milliseconds" )
 
 # configure compilation and linking
 set(
     CMAKE_C_FLAGS
     "${CMAKE_C_FLAGS} \
     -m${PARALLAX_P8X32A_MEMORY_MODEL} \
-    --std=c99 \
+    --std=gnu1x \
     -Werror -Wall -Wpointer-arith -Wstrict-prototypes \
+    -mfcache -fno-exceptions \
+    -u __serial_exit \
     "
 )
 set(
@@ -57,6 +48,7 @@ set(
     -std=gnu++0x \
     -Werror -Wall -Wpointer-arith \
     -mfcache -fno-exceptions -fno-rtti \
+    -u __serial_exit \
     "
 )
 set(

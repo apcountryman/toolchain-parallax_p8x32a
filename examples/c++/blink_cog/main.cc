@@ -122,7 +122,7 @@ int main( void )
     // needed
     {
         // create, configure, and start blinking the LED
-        Blinking_LED( BLINK_PIN, BLINK_CNT, BLINK_PERIOD );
+        Blinking_LED blinking_led( BLINK_LED_PIN, BLINK_CNT, BLINK_PERIOD );
     }
 
     // infinite loop
