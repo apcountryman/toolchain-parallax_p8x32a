@@ -26,6 +26,10 @@ set( CMAKE_BASE_NAME g++ )
 # load platform specific information
 include( Platform/${CMAKE_SYSTEM_NAME}-${CMAKE_BASE_NAME}-${CMAKE_SYSTEM_PROCESSOR} REQUIRED )
 
+# locate the objcopy script
+# TODO: Determine the appropriate way to do this with CMake
+set( CMAKE_COGCXX_OBJCOPY ${CMAKE_CURRENT_LIST_DIR}/CMakeCOGCXXObjcopy.cmake )
+
 # initialize flags
 set( CMAKE_COGCXX_FLAGS_INIT "$ENV{COGCXXFLAGS} ${CMAKE_COGCXX_FLAGS_INIT}" )
 set(
@@ -54,5 +58,5 @@ set(
 set(
     CMAKE_COGCXX_COMPILE_OBJECT
     "<CMAKE_COGCXX_COMPILER> <DEFINES> <FLAGS> -o <OBJECT> <SOURCE>"
-    "${CMAKE_OBJCOPY} --localize-text --rename-section .text=led_blinker.cog <OBJECT>"
+    "${CMAKE_COMMAND} -DCMAKE_OBJCOPY=${CMAKE_OBJCOPY} -DOBJECT=<OBJECT> -P ${CMAKE_COGCXX_OBJCOPY}"
 )
