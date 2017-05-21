@@ -15,23 +15,22 @@
 # File: CMakeCOGCXXObjcopy.cmake
 # Description: Run objcopy on an embedded C++ cog program so that it can be linked into a
 #       larger program.
-
-message( STATUS "CMakeCOGCXXObjcopy.cmake" )
+# Parameters:
+#       - CMAKE_OBJCOPY: The objcopy program to run.
+#       - OBJECT: The object file to run objcopy on.
 
 # extract the name of the object file
 get_filename_component( OBJECT_NAME ${OBJECT} NAME )
 
+# extract the name of the object file with the file extension removed
+get_filename_component( OBJECT_NAME_WE ${OBJECT} NAME_WE )
+
 # extract the location of the object file
 get_filename_component( OBJECT_DIR  ${OBJECT} DIRECTORY )
 
-message( STATUS "CMAKE_OBJCOPY ${CMAKE_OBJCOPY}" )
-message( STATUS "OBJECT        ${OBJECT}" )
-message( STATUS "OBJECT_NAME   ${OBJECT_NAME}" )
-message( STATUS "OBJECT_DIR    ${OBJECT_DIR}" )
-
 # run objcopy
 execute_process(
-    COMMAND ${CMAKE_OBJCOPY} --localize-text --rename-section .text=led_blinker.cog ${OBJECT_NAME}
+    COMMAND ${CMAKE_OBJCOPY} --localize-text --rename-section .text=${OBJECT_NAME_WE}.cog ${OBJECT_NAME}
     WORKING_DIRECTORY ${OBJECT_DIR}
     RESULT_VARIABLE OBJCOPY_RESULT
 )
