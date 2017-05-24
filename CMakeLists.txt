@@ -17,13 +17,11 @@
 #       toolchain example programs.
 
 cmake_minimum_required( VERSION 3.0.2 )
-message( STATUS "CMakeLists.txt - pre project()" )
 project(
     toolchain-parallax_p8x32a
     VERSION   0.1.0
     LANGUAGES C CXX COGCXX
 )
-message( STATUS "CMakeLists.text - post project()" )
 
 # add options for configuring the blink example programs
 set( BLINK_LED_PIN "0"    CACHE STRING "Blink example program LED pin" )

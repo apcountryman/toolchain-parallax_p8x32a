@@ -14,5 +14,3 @@
 
 # File: CMakeTestCOGCXXCompiler.cmake
 # Description: Test the COG C++ compiler.
-
-message( STATUS "CMakeTestCOGCXXCompiler.cmake" )

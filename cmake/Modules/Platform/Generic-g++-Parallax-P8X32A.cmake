@@ -15,8 +15,6 @@
 # File: Generic-g++-Parallax-P8X32A.cmake
 # Description: Parallax P8X32A Propeller microcontroller specific configuration.
 
-message( STATUS "Generic-g++-Parallax-P8X32A.cmake" )
-
 # common COGC++ flags
 set( CMAKE_COGCXX_FLAGS_INIT "-Wno-main -r -mcog -xc++" )
 

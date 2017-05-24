@@ -15,8 +15,6 @@
 # File: toolchain.cmake
 # Description: Parallax P8X32A Propeller microcontroller CMake toolchain.
 
-message( STATUS "toolchain.cmake" )
-
 # system information
 set( CMAKE_SYSTEM_NAME "Generic" )
 set( CMAKE_SYSTEM_PROCESSOR "Parallax-P8X32A" )

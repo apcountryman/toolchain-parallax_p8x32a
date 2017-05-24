@@ -15,8 +15,6 @@
 # File: CMakeCOGCXXInformation.cmake
 # Description: Set up rule variables for COG C++.
 
-message( STATUS "CMakeCOGCXXInformation.cmake" )
-
 # object extension
 set( CMAKE_COGCXX_OUTPUT_EXTENSION .cog )
 
@@ -27,7 +25,6 @@ set( CMAKE_BASE_NAME g++ )
 include( Platform/${CMAKE_SYSTEM_NAME}-${CMAKE_BASE_NAME}-${CMAKE_SYSTEM_PROCESSOR} REQUIRED )
 
 # locate the objcopy script
-# TODO: Determine the appropriate way to do this with CMake
 set( CMAKE_COGCXX_OBJCOPY ${CMAKE_CURRENT_LIST_DIR}/CMakeCOGCXXObjcopy.cmake )
 
 # initialize flags

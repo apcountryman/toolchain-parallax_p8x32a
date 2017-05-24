@@ -15,7 +15,6 @@
 # File: CMakeCOGCXXCompiler.cmake.in
 # Description: Store COG C++ compiler information.
 
-message( STATUS "CMakeCOGCXXCompiler.cmake.in / CMakeCOGCXXCompiler.cmake" )
-
+# identify file extensions ignored/used by the language
 set( CMAKE_COGCXX_IGNORE_EXTENSIONS inl;h;H;hpp;GPP;o;O;obj;OBJ;cog;COG;def;DEF;rc;RC )
 set( CMAKE_COGCXX_SOURCE_FILE_EXTENSIONS cogcc;COGCC;cogcpp;COGCPP )
