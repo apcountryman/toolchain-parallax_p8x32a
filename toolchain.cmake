@@ -63,10 +63,10 @@ list(
     ${PARALLAX_P8X32A_MEMORY_MODEL}
     VALID_MEMORY_MODEL
 )
-if ( ${VALID_MEMORY_MODEL} LESS 0 )
+if( ${VALID_MEMORY_MODEL} LESS 0 )
     message( FATAL_ERROR "${PARALLAX_P8X32A_MEMORY_MODEL} is not a valid memory model" )
 
-endif ( ${VALID_MEMORY_MODEL} LESS 0 )
+endif( ${VALID_MEMORY_MODEL} LESS 0 )
 
 # provide optional loader configuration variables
 option( PARALLAX_P8X32A_LOADER_ENABLE_EEPROM_WRITE "Parallax P8X32A loader write to EEPROM" OFF )

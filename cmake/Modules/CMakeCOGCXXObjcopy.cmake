@@ -42,7 +42,7 @@ execute_process(
 )
 
 # halt the build if there was an objcopy error
-if ( ${OBJCOPY_RESULT} )
+if( ${OBJCOPY_RESULT} )
     message( FATAL_ERROR "CMakeCOGCXXObjcopy.cmake failure: ${OBJCOPY_RESULT}" )
 
-endif ( ${OBJCOPY_RESULT} )
+endif( ${OBJCOPY_RESULT} )
