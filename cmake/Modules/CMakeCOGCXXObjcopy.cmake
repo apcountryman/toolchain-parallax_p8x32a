@@ -29,6 +29,12 @@ get_filename_component( OBJECT_NAME_WE ${OBJECT} NAME_WE )
 get_filename_component( OBJECT_DIR  ${OBJECT} DIRECTORY )
 
 # run objcopy
+if( $ENV{VERBOSE} )
+    message(
+        "${CMAKE_OBJCOPY} --localize-text --rename-section .text=${OBJECT_NAME_WE}.cog ${OBJECT_NAME}"
+    )
+
+endif( $ENV{VERBOSE} )
 execute_process(
     COMMAND ${CMAKE_OBJCOPY} --localize-text --rename-section .text=${OBJECT_NAME_WE}.cog ${OBJECT_NAME}
     WORKING_DIRECTORY ${OBJECT_DIR}
