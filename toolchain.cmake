@@ -19,6 +19,9 @@
 set( CMAKE_SYSTEM_NAME "Generic" )
 set( CMAKE_SYSTEM_PROCESSOR "Parallax-P8X32A" )
 
+# add toolchain specific CMake modules to the CMake modules path
+list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules" )
+
 # mark the toolchain file as advanced
 mark_as_advanced( CMAKE_TOOLCHAIN_FILE )
 
@@ -26,14 +29,17 @@ mark_as_advanced( CMAKE_TOOLCHAIN_FILE )
 mark_as_advanced( CMAKE_INSTALL_PREFIX )
 
 # locate build tools
-find_program( CMAKE_C_COMPILER   propeller-elf-gcc )
-find_program( CMAKE_CXX_COMPILER propeller-elf-g++ )
-find_program( CMAKE_LINKER       propeller-elf-ld )
-find_program( CMAKE_NM           propeller-elf-nm )
-find_program( CMAKE_OBJCOPY      propeller-elf-objcopy )
-find_program( CMAKE_OBJDUMP      propeller-elf-objdump )
-find_program( CMAKE_RANLIB       propeller-elf-ranlib )
-find_program( CMAKE_STRIP        propeller-elf-strip )
+find_program( CMAKE_C_COMPILER      propeller-elf-gcc )
+find_program( CMAKE_CXX_COMPILER    propeller-elf-g++ )
+find_program( CMAKE_COGCXX_COMPILER propeller-elf-g++ )
+find_program( CMAKE_LINKER          propeller-elf-ld )
+find_program( CMAKE_NM              propeller-elf-nm )
+find_program( CMAKE_OBJCOPY         propeller-elf-objcopy )
+find_program( CMAKE_OBJDUMP         propeller-elf-objdump )
+find_program( CMAKE_RANLIB          propeller-elf-ranlib )
+find_program( CMAKE_STRIP           propeller-elf-strip )
+
+mark_as_advanced( CMAKE_COGCXX_COMPILER )
 
 # locate load tools
 find_program( PARALLAX_P8X32A_LOADER propeller-load )
@@ -57,10 +63,10 @@ list(
     ${PARALLAX_P8X32A_MEMORY_MODEL}
     VALID_MEMORY_MODEL
 )
-if ( ${VALID_MEMORY_MODEL} LESS 0 )
+if( ${VALID_MEMORY_MODEL} LESS 0 )
     message( FATAL_ERROR "${PARALLAX_P8X32A_MEMORY_MODEL} is not a valid memory model" )
 
-endif ( ${VALID_MEMORY_MODEL} LESS 0 )
+endif( ${VALID_MEMORY_MODEL} LESS 0 )
 
 # provide optional loader configuration variables
 option( PARALLAX_P8X32A_LOADER_ENABLE_EEPROM_WRITE "Parallax P8X32A loader write to EEPROM" OFF )
