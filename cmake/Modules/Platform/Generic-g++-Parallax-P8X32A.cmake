@@ -15,10 +15,10 @@
 # File: Generic-g++-Parallax-P8X32A.cmake
 # Description: Parallax P8X32A Propeller microcontroller specific configuration.
 
-# common COGC++ flags
+# common COG C++ flags
 set( CMAKE_COGCXX_FLAGS_INIT "-Wno-main -r -mcog -xc++" )
 
-# use C++ build type flags for COGC++
+# use C++ build type flags for COG C++
 set( CMAKE_COGCXX_FLAGS_DEBUG_INIT          "${CMAKE_CXX_FLAGS_DEBUG_INIT}" )
 set( CMAKE_COGCXX_FLAGS_MINSIZEREL_INIT     "${CMAKE_CXX_FLAGS_MINSIZEREL_INIT}" )
 set( CMAKE_COGCXX_FLAGS_RELEASE_INIT        "${CMAKE_CXX_FLAGS_RELEASE_INIT}" )

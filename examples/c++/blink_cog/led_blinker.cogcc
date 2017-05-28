@@ -21,11 +21,12 @@
 
 #include <limits.h>
 #include <propeller.h>
+#include <stdint.h>
 
 #include "led_blinker_mailbox.h"
 
 // address CLKFREQ declaration error to allow CLKFREQ use in cog subprogram
-#undef CLKFREQ
+#undef  CLKFREQ
 #define CLKFREQ (*(int *)0)
 
 /**
