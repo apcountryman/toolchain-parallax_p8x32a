@@ -12,9 +12,9 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: CMakeCOGCXXObjcopy.cmake
-# Description: Run objcopy on an embedded C++ cog program so that it can be linked into a
-#       larger program.
+# File: CMakeCOGObjcopy.cmake
+# Description: Run objcopy on an embedded C/C++ cog program so that it can be linked into
+#       a larger program.
 # Parameters:
 #       - CMAKE_OBJCOPY: The objcopy program to run.
 #       - OBJECT: The object file to run objcopy on.
@@ -43,6 +43,6 @@ execute_process(
 
 # halt the build if there was an objcopy error
 if( ${OBJCOPY_RESULT} )
-    message( FATAL_ERROR "CMakeCOGCXXObjcopy.cmake failure: ${OBJCOPY_RESULT}" )
+    message( FATAL_ERROR "CMakeCOGObjcopy.cmake failure: ${OBJCOPY_RESULT}" )
 
 endif( ${OBJCOPY_RESULT} )

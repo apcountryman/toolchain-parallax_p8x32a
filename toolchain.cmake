@@ -30,6 +30,7 @@ mark_as_advanced( CMAKE_INSTALL_PREFIX )
 
 # locate build tools
 find_program( CMAKE_C_COMPILER      propeller-elf-gcc )
+find_program( CMAKE_COGC_COMPILER   propeller-elf-gcc )
 find_program( CMAKE_CXX_COMPILER    propeller-elf-g++ )
 find_program( CMAKE_COGCXX_COMPILER propeller-elf-g++ )
 find_program( CMAKE_LINKER          propeller-elf-ld )

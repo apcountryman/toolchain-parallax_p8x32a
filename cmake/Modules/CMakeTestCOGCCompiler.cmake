@@ -12,9 +12,5 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: CMakeCOGCXXCompiler.cmake.in
-# Description: Store COG C++ compiler information.
-
-# identify file extensions ignored/used by the language
-set( CMAKE_COGCXX_IGNORE_EXTENSIONS inl;h;H;hpp;HPP;o;O;obj;OBJ;cog;COG;def;DEF;rc;RC )
-set( CMAKE_COGCXX_SOURCE_FILE_EXTENSIONS cogcc;COGCC;cogcpp;COGCPP )
+# File: CMakeTestCOGCCompiler.cmake
+# Description: Test the COG C compiler.

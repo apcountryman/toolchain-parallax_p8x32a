@@ -12,9 +12,14 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: CMakeCOGCXXCompiler.cmake.in
-# Description: Store COG C++ compiler information.
+# File: Generic-gcc-Parallax-P8X32A.cmake
+# Description: Parallax P8X32A Propeller microcontroller specific configuration.
 
-# identify file extensions ignored/used by the language
-set( CMAKE_COGCXX_IGNORE_EXTENSIONS inl;h;H;hpp;HPP;o;O;obj;OBJ;cog;COG;def;DEF;rc;RC )
-set( CMAKE_COGCXX_SOURCE_FILE_EXTENSIONS cogcc;COGCC;cogcpp;COGCPP )
+# common COG C flags
+set( CMAKE_COGC_FLAGS_INIT "-Wno-main -r -mcog -xc" )
+
+# use C build type flags for COG C++
+set( CMAKE_COGC_FLAGS_DEBUG_INIT          "${CMAKE_C_FLAGS_DEBUG_INIT}" )
+set( CMAKE_COGC_FLAGS_MINSIZEREL_INIT     "${CMAKE_C_FLAGS_MINSIZEREL_INIT}" )
+set( CMAKE_COGC_FLAGS_RELEASE_INIT        "${CMAKE_C_FLAGS_RELEASE_INIT}" )
+set( CMAKE_COGC_FLAGS_RELWITHDEBINFO_INIT "${CMAKE_C_FLAGS_RELWITHDEBINFO_INIT}" )

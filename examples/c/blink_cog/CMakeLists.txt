@@ -14,13 +14,28 @@
 
 # File: CMakeLists.txt
 # Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain C example programs.
-
-# build the blink program
-add_subdirectory( blink )
+#       toolchain blink cog C example program.
 
 # build the blink cog program
-add_subdirectory( blink_cog )
-
-# build the hello world program
-add_subdirectory( hello_world )
+add_executable(
+    example-c-blink_cog
+    main.c
+    led_blinker.cogc
+)
+target_compile_definitions(
+    example-c-blink_cog
+    PRIVATE BLINK_LED_PIN=${BLINK_LED_PIN}
+    PRIVATE BLINK_CNT=${BLINK_CNT}
+    PRIVATE BLINK_PERIOD=${BLINK_PERIOD}
+)
+parallax_p8x32a_add_load_target(
+    example-c-blink_cog
+    RUN
+    ${PARALLAX_P8X32A_LOADER_EEPROM}
+    ${PARALLAX_P8X32A_LOADER_VERBOSE}
+    BOARD   ${PARALLAX_P8X32A_LOADER_BOARD}
+    DEFINE  ${PARALLAX_P8X32A_LOADER_DEFINE}
+    INCLUDE ${PARALLAX_P8X32A_LOADER_INCLUDE_PATHS}
+    PORT    ${PARALLAX_P8X32A_LOADER_PORT}
+    SLOW    ${PARALLAX_P8X32A_LOADER_SLOW}
+)
