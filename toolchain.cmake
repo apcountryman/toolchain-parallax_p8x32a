@@ -49,12 +49,13 @@ mark_as_advanced( PARALLAX_P8X32A_LOADER )
 # provide an optional memory model configuration variable
 set(
     PARALLAX_P8X32A_MEMORY_MODELS
+    "cmm"
     "cog"
     "lmm"
     "xmm"
-    "xmmc"
     "xmm-single"
     "xmm-split"
+    "xmmc"
 )
 list( SORT PARALLAX_P8X32A_MEMORY_MODELS )
 set( PARALLAX_P8X32A_MEMORY_MODEL "lmm" CACHE STRING "Parallax P8X32A memory model" )

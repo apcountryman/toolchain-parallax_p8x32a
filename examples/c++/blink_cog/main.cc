@@ -20,6 +20,8 @@
  */
 
 #include <propeller.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "led_blinker.h"
 #include "led_blinker_mailbox.h"
@@ -75,6 +77,17 @@ class Blinking_LED {
         Blinking_LED & operator=( Blinking_LED && ) = delete;
 
     private:
+#ifdef __PROPELLER_USE_XMM__
+        /**
+         * \brief Start the LED blinker cog.
+         *
+         * \param[in] mailbox The LED blinker communication mailbox.
+         *
+         * \return The started LED blinker cog's ID.
+         */
+        static signed int start( LED_Blinker_Mailbox & mailbox );
+#endif // __PROPELLER_USE_XMM__
+
         /**
          * \brief LED blinker communication mailbox.
          */
@@ -92,7 +105,13 @@ Blinking_LED::Blinking_LED(
     unsigned int const period
 ) :
     mailbox_( pin, n, period ),
+#ifdef __PROPELLER_USE_XMM__
+    cog_( start( mailbox_ ))
+
+#else // __PROPELLER_USE_XMM__
     cog_( cognew( _load_start_led_blinker_cog, &mailbox_ ))
+
+#endif // __PROPELLER_USE_XMM__
 {
     // if a LED blinker cog was not successfully started, signal completion
     if ( cog_ < 0 ) { mailbox_.complete_ = true; }
@@ -110,6 +129,15 @@ Blinking_LED::~Blinking_LED()
 
     return;
 }
+
+#ifdef __PROPELLER_USE_XMM__
+signed int Blinking_LED::start( LED_Blinker_Mailbox & mailbox )
+{
+    uint32_t buffer[ 512 ];
+    memcpy( buffer, _load_start_led_blinker_cog, sizeof( buffer ));
+    return cognew( buffer, &mailbox );
+}
+#endif // __PROPELLER_USE_XMM__
 
 /**
  * \brief Main loop.
