@@ -40,6 +40,7 @@ find_program( CMAKE_OBJDUMP         propeller-elf-objdump )
 find_program( CMAKE_RANLIB          propeller-elf-ranlib )
 find_program( CMAKE_STRIP           propeller-elf-strip )
 
+mark_as_advanced( CMAKE_COGC_COMPILER )
 mark_as_advanced( CMAKE_COGCXX_COMPILER )
 
 # locate load tools
@@ -49,12 +50,13 @@ mark_as_advanced( PARALLAX_P8X32A_LOADER )
 # provide an optional memory model configuration variable
 set(
     PARALLAX_P8X32A_MEMORY_MODELS
+    "cmm"
     "cog"
     "lmm"
     "xmm"
-    "xmmc"
     "xmm-single"
     "xmm-split"
+    "xmmc"
 )
 list( SORT PARALLAX_P8X32A_MEMORY_MODELS )
 set( PARALLAX_P8X32A_MEMORY_MODEL "lmm" CACHE STRING "Parallax P8X32A memory model" )

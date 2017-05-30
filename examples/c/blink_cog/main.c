@@ -21,6 +21,7 @@
 
 #include <propeller.h>
 #include <stddef.h>
+#include <string.h>
 
 #include "led_blinker.h"
 #include "led_blinker_mailbox.h"
@@ -72,7 +73,15 @@ static Blinking_LED blinking_led_construct(
 
     // configure the LED's attributes
     attributes->mailbox = LED_BLINKER_MAILBOX_CONSTRUCT( pin, n, period );
+#ifdef __PROPELLER_USE_XMM__
+    uint32_t buffer[ 512 ];
+    memcpy( buffer, _load_start_led_blinker_cog, sizeof( buffer ));
+    attributes->cog     = cognew( buffer, &attributes->mailbox );
+
+#else // __PROPELLER_USE_XMM__
     attributes->cog     = cognew( _load_start_led_blinker_cog, &attributes->mailbox );
+
+#endif // __PROPELLER_USE_XMM__
 
     // if a LED blinker cog was not successfully started, signal completion
     if ( attributes->cog < 0 ) { attributes->mailbox.complete = true; }
