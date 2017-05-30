@@ -19,7 +19,7 @@
 cmake_minimum_required( VERSION 3.0.2 )
 project(
     toolchain-parallax_p8x32a
-    VERSION   0.1.0
+    VERSION   0.2.0
     LANGUAGES C COGC CXX COGCXX
 )
 
