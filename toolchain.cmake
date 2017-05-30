@@ -40,6 +40,7 @@ find_program( CMAKE_OBJDUMP         propeller-elf-objdump )
 find_program( CMAKE_RANLIB          propeller-elf-ranlib )
 find_program( CMAKE_STRIP           propeller-elf-strip )
 
+mark_as_advanced( CMAKE_COGC_COMPILER )
 mark_as_advanced( CMAKE_COGCXX_COMPILER )
 
 # locate load tools
