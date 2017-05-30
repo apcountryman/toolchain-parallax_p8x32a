@@ -92,7 +92,7 @@ if [[ ! -d "$BUILD_PARALLAX_P8X32A_DIR" ]]; then
 fi
 
 cd "$BUILD_PARALLAX_P8X32A_DIR"
-cmake . >/dev/null 2>&1
+cmake -DCMAKE_BUILD_TYPE=Release . >/dev/null 2>&1
 if [[ $? != 0 ]]; then
     echo "error(s) found"
     ( >&2 echo "pre-commit: aborting commit due to Parallax P8X32A build CMake error(s)" )

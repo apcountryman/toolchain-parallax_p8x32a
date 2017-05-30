@@ -12,15 +12,5 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: CMakeLists.txt
-# Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain C++ example programs.
-
-# build the blink program
-add_subdirectory( blink )
-
-# build the blink cog program
-add_subdirectory( blink_cog )
-
-# build the hello world program
-add_subdirectory( hello_world )
+# File: CMakeTestCOGCCompiler.cmake
+# Description: Test the COG C compiler.

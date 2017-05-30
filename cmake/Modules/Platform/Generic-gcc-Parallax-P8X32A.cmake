@@ -12,15 +12,14 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: CMakeLists.txt
-# Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain C++ example programs.
+# File: Generic-gcc-Parallax-P8X32A.cmake
+# Description: Parallax P8X32A Propeller microcontroller specific configuration.
 
-# build the blink program
-add_subdirectory( blink )
+# common COG C flags
+set( CMAKE_COGC_FLAGS_INIT "-Wno-main -r -mcog -xc" )
 
-# build the blink cog program
-add_subdirectory( blink_cog )
-
-# build the hello world program
-add_subdirectory( hello_world )
+# use C build type flags for COG C++
+set( CMAKE_COGC_FLAGS_DEBUG_INIT          "${CMAKE_C_FLAGS_DEBUG_INIT}" )
+set( CMAKE_COGC_FLAGS_MINSIZEREL_INIT     "${CMAKE_C_FLAGS_MINSIZEREL_INIT}" )
+set( CMAKE_COGC_FLAGS_RELEASE_INIT        "${CMAKE_C_FLAGS_RELEASE_INIT}" )
+set( CMAKE_COGC_FLAGS_RELWITHDEBINFO_INIT "${CMAKE_C_FLAGS_RELWITHDEBINFO_INIT}" )

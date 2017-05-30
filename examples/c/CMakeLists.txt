@@ -19,5 +19,8 @@
 # build the blink program
 add_subdirectory( blink )
 
+# build the blink cog program
+add_subdirectory( blink_cog )
+
 # build the hello world program
 add_subdirectory( hello_world )

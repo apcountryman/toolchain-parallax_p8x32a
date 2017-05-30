@@ -42,9 +42,9 @@ details on what variables are available for use, see the `toolchain.cmake` file.
 these variables is demonstrated in the `CMakeLists.txt` files for the example programs.
 
 ## Example Programs
-Example programs for blinking a LED, and displaying a "Hello, world!" message are
-provided. Each example program has two implementations: one written in C, the other in
-C++. Both implementations use the same general design.
+Example programs for blinking a LED, using a separate cog to blink a LED, and displaying a
+"Hello, world!" message are provided. Each example has two implementations: one written in
+C / cog C, the other in C++ / cog C++. Both implementations use the same general design.
 
 The example programs' usage of `parallax_p8x32a_add_load_target()` is more complex than
 what most projects will need. This was done to allow configuration of loader parameters
@@ -79,6 +79,16 @@ To load a blink example program, build one of the following make targets:
 ```
 example-c-blink-load
 example-c++-blink-load
+```
+
+### blink cog
+The blink cog example programs have the same configuration options as the blink example
+programs.
+
+To load a blink example program, build one of the following make targets:
+```
+example-c-blink_cog-load
+example-c++-blink_cog-load
 ```
 
 ### "Hello, world!"

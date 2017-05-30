@@ -12,15 +12,21 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: CMakeLists.txt
-# Description: CMake rules for the Parallax P8X32A Propeller microcontroller CMake
-#       toolchain C++ example programs.
+# File: CMakeDetermineCOGCCompiler.cmake
+# Description: Find the COG C compiler and configure CMakeCOGCCompiler.cmake.in.
 
-# build the blink program
-add_subdirectory( blink )
+# insist that the COG C compiler be provided by the user or a toolchain
+if( NOT CMAKE_COGC_COMPILER )
+    message( FATAL_ERROR "CMAKE_COGC_COMPILER must be set by the user or a toolchain" )
 
-# build the blink cog program
-add_subdirectory( blink_cog )
+endif( NOT CMAKE_COGC_COMPILER )
 
-# build the hello world program
-add_subdirectory( hello_world )
+# store COG C compiler information
+configure_file(
+    ${CMAKE_CURRENT_LIST_DIR}/CMakeCOGCCompiler.cmake.in
+    ${CMAKE_PLATFORM_INFO_DIR}/CMakeCOGCCompiler.cmake
+    @ONLY
+)
+
+# set CMake's compiler environment variable for the language
+set( CMAKE_COGC_COMPILER_ENV_VAR "COGC" )

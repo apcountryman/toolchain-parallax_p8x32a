@@ -1,0 +1,83 @@
+/**
+ * toolchain-parallax_p8x32a
+ *
+ * Copyright 2017 Andrew Countryman <apcountryman@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+ * file except in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+/**
+ * \file led_blinker.cogc
+ * \brief LED blinker subprogram implementation.
+ */
+
+#include <limits.h>
+#include <propeller.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#include "led_blinker_mailbox.h"
+
+// address CLKFREQ declaration error to allow CLKFREQ use in cog subprogram
+#undef  CLKFREQ
+#define CLKFREQ (*(int *)0)
+
+/**
+ * \brief Blink an LED
+ *
+ * \param[in] mailbox Blink parameters and completion signal.
+ *
+ * \return N/A, enters an infinite loop once blinking is complete.
+ */
+__attribute__(( naked )) int main( LED_Blinker_Mailbox * mailbox )
+{
+    // ensure subprogram pre-conditions are met
+    bool error = !mailbox                       ? true
+               : mailbox->complete              ? true
+               : mailbox->pin    > 31           ? true
+               : mailbox->n      > UINT_MAX / 2 ? true
+               : mailbox->period < 2            ? true
+                                                : false;
+
+    // blink the LED if there are no errors
+    if ( !error ) {
+        // initialize the blink count
+        unsigned int const n = mailbox->n;
+
+        // calculate the bit mask for interacting with the I/O registers
+        uint32_t const mask = 1 << mailbox->pin;
+
+        // configure the pin as an output, initially driven low
+        OUTA &= ~mask;
+        DIRA |=  mask;
+
+        // initialize timing parameters
+        uint32_t const half_period_ticks = ( CLKFREQ / 1000U ) * ( mailbox->period / 2 );
+        uint32_t       next_cnt          = half_period_ticks + CNT;
+
+        // blink the LED
+        for ( unsigned int i = 0; n == 0 || i < 2 * n; ++i ) {
+            // wait half a period
+            next_cnt = waitcnt2( next_cnt, half_period_ticks );
+
+            // toggle the LED
+            OUTA ^= mask;
+
+        } // for
+
+    } // if
+
+    // signal blinking completion if a mailbox was provided
+    if ( mailbox ) { mailbox->complete = true; }
+
+    // infinite loop
+    for ( ;; ) {}
+}

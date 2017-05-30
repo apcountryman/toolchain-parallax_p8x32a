@@ -19,8 +19,8 @@
 cmake_minimum_required( VERSION 3.0.2 )
 project(
     toolchain-parallax_p8x32a
-    VERSION 0.1.0
-    LANGUAGES C CXX
+    VERSION   0.2.0
+    LANGUAGES C COGC CXX COGCXX
 )
 
 # add options for configuring the blink example programs
@@ -40,6 +40,14 @@ set(
     "
 )
 set(
+    CMAKE_COGC_FLAGS
+    "${CMAKE_COGC_FLAGS} \
+    -std=gnu1x \
+    -Werror -Wall -Wpointer-arith -Wstrict-prototypes \
+    -fno-exceptions \
+    "
+)
+set(
     CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} \
     -m${PARALLAX_P8X32A_MEMORY_MODEL} \
@@ -47,6 +55,14 @@ set(
     -Werror -Wall -Wpointer-arith \
     -mfcache -fno-exceptions -fno-rtti \
     -u __serial_exit \
+    "
+)
+set(
+    CMAKE_COGCXX_FLAGS
+    "${CMAKE_COGCXX_FLAGS} \
+    -std=gnu++0x \
+    -Werror -Wall -Wpointer-arith \
+    -fno-exceptions -fno-rtti \
     "
 )
 
