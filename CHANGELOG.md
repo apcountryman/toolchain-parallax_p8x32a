@@ -3,6 +3,10 @@ Change log for the Parallax P8X32A Propeller CMake toolchain.
 
 ## [Unreleased]
 
+## [0.2.1] - 2017-07-15
+### Fix
+- [Issue 1]
+
 ## [0.2.0] - 2017-05-29
 ### Add
 - Support for embedding cog C/C++ subprograms in a larger program.
@@ -17,5 +21,7 @@ Change log for the Parallax P8X32A Propeller CMake toolchain.
 - Blinking LED and "Hello, world!" example programs implemented in both C, and C++.
 
 [Unreleased]: https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/master...develop
+[0.2.1]:      https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/0.2.0...0.2.1
 [0.2.0]:      https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/0.1.0...0.2.0
 [0.1.0]:      https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/0f79f8ddcb6869fd5e19dfe3b32f22881a066d03...0.1.0
+[Issue 1]:   https://github.com/apcountryman/toolchain-parallax_p8x32a/issues/1
