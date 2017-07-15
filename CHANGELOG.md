@@ -5,7 +5,7 @@ Change log for the Parallax P8X32A Propeller CMake toolchain.
 
 ## [0.2.1] - 2017-07-15
 ### Fix
-- [Issue 1]
+- [Issue 1].
 
 ## [0.2.0] - 2017-05-29
 ### Add
