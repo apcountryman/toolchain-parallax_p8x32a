@@ -28,6 +28,10 @@ target_compile_definitions(
     PRIVATE BLINK_CNT=${BLINK_CNT}
     PRIVATE BLINK_PERIOD=${BLINK_PERIOD}
 )
+target_include_directories(
+    example-c-blink_cog
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+)
 parallax_p8x32a_add_load_target(
     example-c-blink_cog
     RUN
