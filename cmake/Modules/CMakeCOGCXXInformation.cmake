@@ -15,6 +15,9 @@
 # File: CMakeCOGCXXInformation.cmake
 # Description: Set up rule variables for COG C++.
 
+# include directory flags
+set( CMAKE_INCLUDE_FLAG_COGCXX "-I" )
+
 # object extension
 set( CMAKE_COGCXX_OUTPUT_EXTENSION .cog )
 

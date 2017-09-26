@@ -15,6 +15,9 @@
 # File: CMakeCOGCInformation.cmake
 # Description: Set up rule variables for COG C.
 
+# include directory flag
+set( CMAKE_INCLUDE_FLAG_COGC "-I" )
+
 # object extension
 set( CMAKE_COGC_OUTPUT_EXTENSION .cog )
 
