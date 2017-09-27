@@ -3,6 +3,10 @@ Change log for the Parallax P8X32A Propeller CMake toolchain.
 
 ## [Unreleased]
 
+## [0.2.3] - 2017-09-26
+### Fix
+- [Issue 2]
+
 ## [0.2.2] - 2017-09-25
 ### Fix
 - [Issue 2].
@@ -25,6 +29,7 @@ Change log for the Parallax P8X32A Propeller CMake toolchain.
 - Blinking LED and "Hello, world!" example programs implemented in both C, and C++.
 
 [Unreleased]: https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/master...develop
+[0.2.3]:      https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/0.2.2...0.2.3
 [0.2.2]:      https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/0.2.1...0.2.2
 [0.2.1]:      https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/0.2.0...0.2.1
 [0.2.0]:      https://github.com/apcountryman/toolchain-parallax_p8x32a/compare/0.1.0...0.2.0
